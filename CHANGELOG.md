@@ -1,3 +1,11 @@
+# 1.0.0 (2025-04-02)
+
+
+### Bug Fixes
+
+* cover force push case ([eb212fd](https://github.com/Fuucodi0X/release/commit/eb212fd8b3b069c30a77f6ea16790580b2246fcd))
+* remove duplicate ([1c2f6f3](https://github.com/Fuucodi0X/release/commit/1c2f6f323ff9531a04c0271088603c893d0fd10e))
+
 # [1.2.0](https://github.com/Fuucodi0X/releaseWorkflow2/compare/v1.1.0...v1.2.0) (2025-04-02)
 
 
