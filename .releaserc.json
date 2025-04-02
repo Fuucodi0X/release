@@ -1,0 +1,28 @@
+{
+  "branches": ["main"],
+  "verifyConditions": [
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "git tag -d $(git describe --tags --abbrev=0) || true && git push origin :$(git describe --tags --abbrev=0) || true"
+    }
+  ],
+  "plugins": [
+    ["@semantic-release/commit-analyzer", {
+      "preset": "conventionalcommits",
+      "releaseRules": [
+        {"type": "revert", "release": "patch"}
+      ]
+    }],
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    ["@semantic-release/exec", {
+      "prepareCmd": "echo ${nextRelease.version} > src/VERSION"
+    }],
+    ["@semantic-release/git", {
+      "assets": ["CHANGELOG.md", "src/VERSION"],
+      "message": "chore(release): ${nextRelease.version} [skip ci]",
+      "push": "--force"
+    }],
+    "@semantic-release/github"
+  ]
+}

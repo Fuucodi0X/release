@@ -1,0 +1,54 @@
+name: Semantic Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'src/VERSION'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+      checks: write
+      
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true  # Fetch all tags from remote
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup Orphaned Tags
+        if: github.event.forced  # Detect force pushes
+        run: |
+          git fetch --prune --prune-tags origin '+refs/tags/*:refs/tags/*'
+          git tag -d $(git tag -l) || true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install semantic-release
+        run: |
+          npm install -g \
+            semantic-release \
+            @semantic-release/git \
+            @semantic-release/github \
+            @semantic-release/changelog \
+            @semantic-release/exec \
+            conventional-changelog-conventionalcommits
+
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          # Allow recreation of tags for history rewrites
+          npx semantic-release --force --debug \
+            --tag-format 'v${version}' \
+            --no-ci
