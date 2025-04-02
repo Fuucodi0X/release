@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/Fuucodi0X/release/compare/v1.0.0...v1.1.0) (2025-04-02)
+
+
+### Bug Fixes
+
+* remove tag verify cmd ([432e7e4](https://github.com/Fuucodi0X/release/commit/432e7e46859380eb48ffe80561bfb3347afecec6))
+
+
+### Features
+
+* **main-css:** init ([17601f1](https://github.com/Fuucodi0X/release/commit/17601f1358da952cc0d66f5dc89fd7bdb05f02d0))
+* **main-js:** init ([549ba54](https://github.com/Fuucodi0X/release/commit/549ba54a72ada97223f17dd64488683b9debd216))
+
 # 1.0.0 (2025-04-02)
 
 
