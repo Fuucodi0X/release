@@ -11,23 +11,34 @@ jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # Allow pushing tags and commits
       actions: read
       checks: write
-      
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          fetch-tags: true  # Fetch all tags from remote
+          fetch-depth: 0  # Fetch all commits and tags
+          fetch-tags: true  # Ensure tags are available
           token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
-      - name: Cleanup Orphaned Tags
-        if: github.event.forced  # Detect force pushes
+      - name: Cleanup Orphaned Tags (Force Push Only)
+        if: github.event.forced  # Run only on force pushes
         run: |
+          # Fetch all tags from remote (overwrite local tags)
+          git fetch --tags --force
+          # Prune tags deleted on remote
           git fetch --prune --prune-tags origin '+refs/tags/*:refs/tags/*'
-          git tag -d $(git tag -l) || true
+          # Delete tags not in the current history
+          for tag in $(git tag -l); do
+            # Check if the tagged commit exists in the current branch
+            if ! git merge-base --is-ancestor $tag HEAD 2>/dev/null; then
+              echo "Deleting orphaned tag: $tag"
+              git tag -d $tag  # Delete locally
+              git push origin ":refs/tags/$tag" || true  # Delete remotely
+            fi
+          done
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -48,7 +59,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
-          # Allow recreation of tags for history rewrites
-          npx semantic-release --force --debug \
+          npx semantic-release --debug \
             --tag-format 'v${version}' \
             --no-ci
