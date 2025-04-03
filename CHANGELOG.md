@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Fuucodi0X/release/compare/v1.1.0...v1.2.0) (2025-04-03)
+
+
+### Features
+
+* **main-js:** draft ui ([3b3fa54](https://github.com/Fuucodi0X/release/commit/3b3fa54fc27fab92d34fc15e7aa075d2792cf79d))
+
 # [1.1.0](https://github.com/Fuucodi0X/release/compare/v1.0.0...v1.1.0) (2025-04-02)
 
 
