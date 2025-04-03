@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Fuucodi0X/release/compare/v1.2.0...v1.2.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* remove footer ([49fc034](https://github.com/Fuucodi0X/release/commit/49fc034f47e757059c6d8585704d1c59d7447d3c))
+
 # [1.2.0](https://github.com/Fuucodi0X/release/compare/v1.1.0...v1.2.0) (2025-04-03)
 
 
