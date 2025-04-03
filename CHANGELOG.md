@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Fuucodi0X/release/compare/v1.2.1...v1.2.2) (2025-04-03)
+
+
+### Bug Fixes
+
+* **revert:** Revert "Merge pull request [#1](https://github.com/Fuucodi0X/release/issues/1) from Fuucodi0X/mergeIt" ([586d743](https://github.com/Fuucodi0X/release/commit/586d7437adb6434d7547adc8d5a23a2f368e39c4))
+
 ## [1.2.1](https://github.com/Fuucodi0X/release/compare/v1.2.0...v1.2.1) (2025-04-03)
 
 
