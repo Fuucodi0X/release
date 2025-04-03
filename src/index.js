@@ -1,1 +1,2 @@
 // JS
+const variable = "var"
